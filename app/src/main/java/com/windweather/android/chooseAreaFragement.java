@@ -3,6 +3,7 @@ package com.windweather.android;
 ;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -84,6 +85,12 @@ public class chooseAreaFragement extends Fragment {
                 }else if (currentLevel == LEVEL_CITY){
                     selectedCity = cityList.get(i);
                     queryCounties();
+                }else if (currentLevel == LEVEL_COUNTY){
+                    String s = countyList.get(i).getmWeatherId();
+                    Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                    intent.putExtra("weather_id",s);
+                    startActivity(intent);
+                    getActivity().finish();
                 }
             }
         });
@@ -93,7 +100,7 @@ public class chooseAreaFragement extends Fragment {
                 if (currentLevel == LEVEL_COUNTY){
                     queryCities();
                 }else if (currentLevel == LEVEL_CITY){
-                    queryCounties();
+                    queryProvinces();
                 }
             }
         });
