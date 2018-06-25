@@ -18,5 +18,15 @@
         android:textSize="16sp"
         android:textColor="#fff"
         android:text=""/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="切换"
+        android:textSize="15sp"
+        android:id="@+id/nav_button"
+        android:textColor="#fff"
+        android:layout_marginBottom="35dp"
+        android:background="@android:color/transparent"/>
 
 </RelativeLayout>

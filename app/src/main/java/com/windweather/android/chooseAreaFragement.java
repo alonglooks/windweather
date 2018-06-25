@@ -2,6 +2,7 @@ package com.windweather.android;
 
 ;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -59,6 +60,7 @@ public class chooseAreaFragement extends Fragment {
     private City selectedCity;
     //当前选中的级别
     private int currentLevel;
+    private String weatherId;
 
     @Nullable
     @Override
@@ -86,11 +88,20 @@ public class chooseAreaFragement extends Fragment {
                     selectedCity = cityList.get(i);
                     queryCounties();
                 }else if (currentLevel == LEVEL_COUNTY){
-                    String s = countyList.get(i).getmWeatherId();
-                    Intent intent = new Intent(getActivity(), WeatherActivity.class);
-                    intent.putExtra("weather_id",s);
-                    startActivity(intent);
-                    getActivity().finish();
+
+                        weatherId = countyList.get(i).getmWeatherId();
+                    if (getActivity() instanceof MainActivity) {
+                        Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                        intent.putExtra("weather_id", weatherId);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }else if (getActivity() instanceof WeatherActivity){
+                        WeatherActivity weatherActivity = (WeatherActivity) getActivity();
+                        weatherActivity.drawerLayout.closeDrawers();
+                        weatherActivity.swipeRefresh.setRefreshing(true);
+                        weatherActivity.requestWeathe(weatherId);
+
+                    }
                 }
             }
         });

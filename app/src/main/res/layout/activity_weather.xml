@@ -4,32 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.windweather.android.WeatherActivity"
-    >
-    <ImageView
-        android:id="@+id/bing_pic_img"
+    tools:context="com.windweather.android.WeatherActivity">
+
+    <android.support.v4.widget.DrawerLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"/>
+        android:id="@+id/drawer_layout">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/weather_layout"
-        android:overScrollMode="never"
-        android:scrollbars="none">
-
-        <LinearLayout
+        <ImageView
+            android:id="@+id/bing_pic_img"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:fitsSystemWindows="true">
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
 
-            <include layout="@layout/title" />
-            <include layout="@layout/now"/>
-            <include layout="@layout/forecast"/>
-            <include layout="@layout/aqi"/>
-            <include layout="@layout/suggestion"/>
-        </LinearLayout>
-    </ScrollView>
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_fresh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ScrollView
+                android:id="@+id/weather_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fitsSystemWindows="true"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/title" />
+
+                    <include layout="@layout/now" />
+
+                    <include layout="@layout/forecast" />
+
+                    <include layout="@layout/aqi" />
+
+                    <include layout="@layout/suggestion" />
+                </LinearLayout>
+            </ScrollView>
+        </android.support.v4.widget.SwipeRefreshLayout>
+        <fragment
+            android:id="@+id/choose_area_fragent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="com.windweather.android.chooseAreaFragement"
+            android:layout_gravity="start">
+
+        </fragment>
+    </android.support.v4.widget.DrawerLayout>
+
+
 </FrameLayout>
